@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0px;
+  background-color: white;
+  border-bottom: 1px solid gray;
+ &__left {
+   display: flex;
+   & > img {
+    margin-right: 10px;
+    height: 40px;
+    object-fit: contain;
+  }
+ }
+
+ &__search{
+   display: flex;
+   align-items: center;
+   background: #eee;
+   padding: 0px 10px;
+   border-radius: 5px;
+   input {
+     border: none;
+     outline: none;
+     background: none;
+   }
+ }
+
+ &__right{
+   display: flex;
+ }
+}

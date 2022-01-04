@@ -1,0 +1,16 @@
+.inoutOption {
+  display: flex;
+  padding: 5px 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  align-items: center;
+  cursor: pointer;
+
+  h4 {
+    font-size: 12px;
+  }
+
+  &:hover {
+    background-color: lightgray;
+  }
+}

@@ -1,0 +1,33 @@
+.post {
+  background-color: white;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    h3 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+
+    &__info {
+      margin-left: 10px;
+    }
+  }
+
+  &__body {
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+}
