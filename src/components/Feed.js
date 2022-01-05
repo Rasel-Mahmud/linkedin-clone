@@ -18,35 +18,38 @@ function Feed() {
     e.preventDefault();
 
     const addPost = async() => {
-      const postCollection = await addDoc(collection(db, 'posts'), {
+      await addDoc(collection(db, 'posts'), {
         name: "Mahamud Hasan Rashel",
         degisnation: 'Software Engineer',
         description: input,
         photoUrl: '',
+        time : Timestamp.now()
       });
-
-      console.log("Document written with ID: ", postCollection);
     }
     addPost();
+    setInput('')
   }
 
-  const test = async () => {
-    try {
-      const postCollection = await collection(db, 'posts');
-      const unsubscribe = await onSnapshot(postCollection, (snapshot) => {
-        console.log(snapshot.docs.map(doc =>({
-          id: doc.id,
-          data: doc.data()
-        })));
-      })
-      console.log(unsubscribe);
-    } catch (err){
-      console.log(err)
-    }
-  };
-
   useEffect(()=> {
-  test();
+
+    // syncing data from firebase to local state
+    const getPosts = async () => {
+      try {
+        const postCollection = await collection(db, 'posts');
+        await onSnapshot(postCollection, (snapshot) => {
+          setPosts(snapshot.docs.map(doc => {
+            return {
+              id: doc.id,
+              data: doc.data()
+            }
+          }));
+        })
+      } catch (err){
+        console.log(err)
+      }
+    };
+
+    getPosts();
 
   }, [])
 
@@ -67,9 +70,11 @@ function Feed() {
           <InputOption Icon={CalendarTodayIcon} title="Write Article" color="" />
         </div>
       </div>
-      {posts.map(post => (
-        <Post name="Mahamud Hasan Rashel" degisnation="Degisnation" description="Description will goes here" />
-      ))}
+      {posts.map(post => {
+        const {id, data: {degisnation, description, name, photoUrl}} = post;
+        return <Post key={id} name={name} degisnation={degisnation} description={description} />
+        }
+      )}
     </div>
   )
 }
